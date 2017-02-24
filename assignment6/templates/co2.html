@@ -1,0 +1,41 @@
+
+<form method="POST" action="{{ url_for('co2') }}">
+  <h1>CO2 Plot </h1>     
+           </br> year from </br> 
+            <select name="from_year">
+			<option value=1786>1786</option>
+              {% for y in year %}
+                <option value="{{y}}">{{y}}</option>
+              {% endfor %}
+              
+            </select>
+            to 
+			<select name="to_year">
+            <option value=2012>2012</option>
+              {% for y in year %}
+                <option value="{{y}}">{{y}}</option>
+              {% endfor %}        
+            </select>
+			</br></br>
+			
+			</br>co2 from </br> 
+            <select name="y_axis_min">
+			 <option value=8>8</option>         
+              {% for co in range(min_co2,max_co2) %}
+                <option value="{{co}}">{{co}}</option>
+              {% endfor %}
+              
+            </select>
+            to
+            <select name="y_axis_max">
+			<option value=800>800</option>
+              {% for co in range(min_co2,max_co2) %}
+                <option value="{{co}}">{{co}}</option>
+              {% endfor %}
+            </select>
+			</br></br>
+            </br></br>
+			
+    <button type="submit">Plot</button>
+  
+</form>

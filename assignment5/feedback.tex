@@ -1,0 +1,148 @@
+\documentclass[a4paper]{article}
+
+% Import some useful packages
+\usepackage[margin=0.5in]{geometry} % narrow margins
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{hyperref}
+\usepackage{minted}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{hyperref} % For adding hyperlinks
+\definecolor{LightGray}{gray}{0.95}
+
+\title{Peer-review of INF3331 assignment 5 for \textit{yosiefht}}
+\author{Jonathan P. Stang, jonathps, {jonathps@ulrik.uio.no} \\
+ 		Thach Khoi Pham, thachkp, {thachkp@ifi.uio.no} \\
+		Thor K. Høgås, tmhogaas, {tmhogaas@ifi.uio.no}}
+
+\begin{document}
+\maketitle
+
+\section{Review }\label{sec:review}
+I've used a Linux workstation at Ifi (Institutt for Informatikk) to review your assignment. I compiled your code using Python 3.5.2 with Anaconda 4.2.0 installed. The main reviewer was Jonathan Stang.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{General feedback}
+You have solved the exercises as expected. The main issue I personally would've liked to see, was a well written Readme.txt. It was not clear which programming language you were choosing as favorite languages. This coudl've been explained in the Readme.txt.
+Also, the Readme.txt woudl've been much more helpful if it contained precise command line arguments to run all the different exercises.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Assignment 5.1: Syntax highlighting}
+First off, your code works as expected. It prints out the desired colored text to the terminal, according to the syntax and theme file.
+
+\begin{itemize}
+  \item Comments on code structure in the script highlighter.py. The first two comments are general, and should apply to all your future python scripts.
+\begin{itemize}
+	\item First off, I would've liked to see you test whether the python interpreter runs this script as the main program or as a module in another program. The way to implement this would be: 
+    
+    \begin{minted}[bgcolor=LightGray, linenos, fontsize=\footnotesize]{python}
+if __name__ == "__main__": # Add this line before calling your function(s).
+	if(len(sys.argv) == 4):	
+		syntaxFile =sys.argv[1]
+		themeFile =sys.argv[2]
+		sourceFile_to_colour =sys.argv[3]
+		readFile(syntaxFile, themeFile, sourceFile_to_colour)	
+	else:
+		sys.stdout.write("provide correct file inputs:" + '\n')
+		sys.stdout.write("python3 highlighter.py syntaxfile themefile sourcefile_to_colour")
+	\end{minted}
+\newline
+	\item Secondly, I would've liked a Python Docstring. This is standard procedure in programming languages such as Python, Java, and C. It is basically a section that explains each function and/or class. In Python, you can write it above and outside or below and inside the function declaration. In my example below it is placed below and inside the function declaration, hence it is indented:
+    
+    \begin{minted}[bgcolor=LightGray, linenos, fontsize=\footnotesize]{python}
+
+def foo_bar(foo, bar):
+    """ These first lines explains what your function foo_bar() does in plain language.
+    A reader should be able to understand what this function is doing by reading this docstring.
+
+    Args:
+        foo: The first parameter.
+        bar: The second parameter.
+
+    Returns:
+        The return value. string, array, double array, integer, ...
+
+    """
+	\end{minted}
+\newline
+	\item Your function readFile() actually does two / three different procedures. Two are quite similar, but the third is not. Try to separate different tasks into different functions.
+    The two similar procedures are the reading of the theme file and the syntax file. This could've been inside one function. 
+    Next, the reading and printout of the file\_to\_color could've been in a different function, called printFile().
+    I understand you make two dictionaries theme and syntax. Your code structure could therefore have  the form:
+    
+ \begin{minted}[bgcolor=LightGray, linenos, fontsize=\footnotesize]{python}
+
+def readFile(syntaxFile, themeFile, sourceFile):
+    """ Docstring explaining this function.
+    """
+    
+    # Making of dictionaries syntax_dict and theme_dict
+    ...
+    # Call to printFile()
+    printFile(syntax_dict, theme_dict, sourceFile)
+    
+def printFile(syntax_dict, theme_dict, sourceFile):
+	""" Docstring explaining this function.
+    """
+    # Reading of sourceFile
+    ...
+    # Printing of sourceFile with colorings.
+    ...
+    \end{minted}    
+    
+	\end{itemize}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Assignment 5.2: Python syntax} \label{sec:assignment5.2}
+The second and third regex commands in python.syntax works as expected. The first, however, 
+which is the one on 'comments', only works on inline comments, not on docstrings. Docstrings can be able to be several lines long, which your regex does not take into account.
+\begin{itemize}
+
+\item Solution to docstring regex:
+\newline
+\begin{minted}[bgcolor=LightGray, linenos, fontsize=\footnotesize]{python}
+# For docstrings, instead of 
+""".*(?:$|\n)|'''.*(?:$|\n)
+\end{minted}
+\begin{minted}[bgcolor=LightGray, linenos, fontsize=\footnotesize]{python}
+# use
+'{3}(.|\n)*?'{3}|"{3}(.|\n)*?"{3}
+\end{minted}
+\item I would say the regex line 'standard' cover 5-6 different python syntaxes. These could've been implemented separately, to give more of a color pallette to your printout.
+\item There is actually a small error inside the line
+
+\begin{minted}[bgcolor=LightGray, linenos, fontsize=\footnotesize]{python}
+"\b(def|for|while|else|from|import|if|elif|)\b": standard
+\end{minted}
+\newline
+which is the the character '\textbar' at the end. The code runs when this is removed.
+
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Assignment 5.3: Syntax for your favorite language}
+The code runs. My problem is: Which language is this? I suppose it is Java, but you should comment on these things in the Readme.txt. 
+As in Assignment 5.2 \ref{sec:assignment5.2}, you have not implemented more than one regex for the whole of the Java syntaxes. This should've been done.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Assignment 5.4: Syntax for your second favorite language}
+As in Assignment 5.3, I do not know which language you are talking about. The syntax runs, but seems limited, just as in 5.3.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Assignment 5.5: superdiff}
+Congratulations on writing a working diff-algorithm. The standard algorithm for this is \href{https://www.youtube.com/watch?v=NnD96abizww}{Longest Common Subsequence (video explanation)}. Which it doesn't look like you've been using.
+Unlike highligther.py, you do actually have a Python Docstring for your function here. Good! But like highlighter.py, you fail to test whether the script is run as the main program or as a module in another program. This should be implemented.
+
+Also, The last line lacks a newline character '\textbackslash n'. This would make print to terminal more pretty.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Assignment 5.6:  Coloring diff}
+Aside from the fact you color purple instead of red and blue instead of green, everything works as expected.
+
+
+
+\bibliographystyle{plain}
+\bibliography{literature}
+
+\end{document}

@@ -1,0 +1,7 @@
+using cython.
+mandelbrot_3.py
+
+the runtime is approximately:
+1.33 seconds
+
+which is the fastest

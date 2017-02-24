@@ -1,0 +1,3 @@
+"//.*(?:$|\n)": comment
+"\b(if|{|}|else|return|var|catch|function|try|new|for|in)\b": keyword
+"\".+?\"|'.+?\'": string

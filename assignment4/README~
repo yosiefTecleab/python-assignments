@@ -1,0 +1,20 @@
+
+how to run:
+
+4.1  python mandelbrot_1.py
+
+
+4.2 python mandelbrot_2.py
+
+
+4.3 python setup.py build_ext --inplace
+    
+    python mandelbrot_3.py
+
+4.5 python mandelbrotInterface.py -python
+    
+    python mandelbrotInterface.py -numpy
+    
+    python mandelbrotInterface.py -cython
+    
+    python mandelbrotInterface.py --help

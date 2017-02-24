@@ -1,0 +1,10 @@
+in the range(n) function in better_addition the problem reside there.
+
+-for n in range(num_rechecks): num_rechecks must be non zero. it must be greater than or equal to one.
+the first input test (4, 7, 0, 11) the 0 will pass to num_rechecks when the function better_addition is called.
+which is fail when sum_computations to be assigned. that is range(0) which is empty.
+
+so test case (4, 7, 0, 11) is failed.
+the other two are correct
+
+

@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+
+	<form method="POST" action="{{ url_for('temperature') }}">
+       <h1>Temperature Plot </h1>
+		   </br>temperature from </br>
+			
+			<select name="y_axis_min">
+			  <option value=-5>-5</option>
+			  {% for i in range(min_temp-2,max_temp+2) %}
+				<option value="{{i}}">{{i}}</option>
+			  {% endfor %}
+			  
+			</select>
+			to
+			<select name="y_axis_max">
+			   <option value=5>5</option>
+			  {% for i in range(min_temp-2,max_temp+2) %}
+				<option value="{{i}}">{{i}}</option>
+			  {% endfor %}
+			</select>
+			</br></br>   
+
+           </br> month </br>
+			<select name="month">
+			<option value="February">February</option>
+				{% for m in month %}
+				<option value="{{m}}">{{m}}</option>
+				{% endfor %}
+				
+			</select>
+            </br></br>	
+        	</br> year from </br>
+				<select name="from_year">
+                 <option value=1864>1864</option>
+				  {% for y in year %}
+					<option value="{{y}}">{{y}}</option>
+				  {% endfor %}
+				  
+				</select>
+				to 
+				<select name="to_year">
+                                     
+				 <option value=2010>2010</option>
+				  {% for y in year %}
+					<option value="{{y}}">{{y}}</option>
+				  {% endfor %}
+				  
+				</select>			
+                </br></br>	
+                </br></br>	
+		
+	  
+		<button type="submit">Plot</button>
+	  
+	</form>
+

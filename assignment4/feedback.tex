@@ -1,0 +1,103 @@
+\documentclass[a4paper]{article}
+
+% Import some useful packages
+\usepackage[margin=0.5in]{geometry} % narrow margins
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{hyperref}
+\usepackage{minted}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\definecolor{LightGray}{gray}{0.95}
+
+\title{Peer-review of assignment 4 for \textit{INF3331-yosiefht}}
+\author{Reviewer 1, jonmgu, {jonmgu@student.matnat.uio.no} \\
+ 		Reviewer 2, thachkp, {thachkp@student.matnat.uio.no} \\
+		Reviewer 3, aliabo, {aliabo@student.matnat.uio.no}}
+
+\begin{document}
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Systems used to review}
+System A: \newline
+Operating system: Ubuntu 16.04 LTS (64-bit) :: 
+Python version: 3.5.2 :: Anaconda 4.1.1 (64-bit) \newline
+System B: \newline
+Operating system: Linux Mint 18 Sarah :: Python version: 3.5.2 :: Anaconda 4.2.9 (64-bit) \newline
+System C: \newline
+Operating system: OS X EL CAPITAN :: Python 3.5.2 :: Anaconda 4.2.0 (64-bit)
+\newline
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{General feedback}
+Very well done. You should get used to use docstring in all your codes, even if the code is easy to read.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Assignment 4.1: Python implementation}
+
+The code executes as expected. The code is well-structured and easy to read, with descriptive comments.\newline
+The code could have been improved with a docstring providing a summary of the method in the file, but this is a minor issue.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Assignment 4.2:  numpy implementation} \label{sec:assignment5.2}
+
+The code is vectorized and runs approx 5 times faster than assignment 4.1. The code is well-structured and simple to read. Crucial lines of the code have been commented. Overall a short and sweet little script.\newline
+We have no comments regardng any improvements.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Assignment 4.3: Integrated C implementation}
+
+The code looks fine.\newline
+It is vectorized, which is more impressive that the other Cython implementations we have seen. It is approx 7 times faster than the numpy vectorization on our casual run of the code.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Assignment 4.4:  An alternative integrated C implementation}
+
+N/A
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Assignment 4.5: User interface}
+
+mandelbrotuserinterface.py allows the user to change between the different versions at the command line. When executing, the file asks for the other parameters as well as the filename.\newline
+The user interface seems to satisfy all the requirements of the assignement.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Assignment 4.6:  Packaging and unit tests}
+
+We get a compile error when running setup.py install:  \newline
+\begin{minted}[bgcolor=LightGray, linenos, fontsize=\footnotesize]{python} 
+Fatal error: numpy/arrayobject.h: no such file or directory. 
+\end{minted}
+\newline
+We have tested this on three systems, but we also get the same error on all three assignments we have reviewed so this may be something that works on the default UIO machines.
+We correct this by including  \newline
+\begin{minted}[bgcolor=LightGray, linenos, fontsize=\footnotesize]{python} 
+import numpy 
+\end{minted}
+\newline
+and \newline
+\begin{minted}[bgcolor=LightGray, linenos, fontsize=\footnotesize]{python} 
+[(include\_dirs = (numpy.getinclude())] 
+\end{minted}
+\newline
+
+A somewhat minor issue is that we can not find a method named exactly compute\_mandelbrot as specified in the assignment, and the three implementations seem to use 255 iterations as default rather than the 1000 specified in the assignment.
+\newline
+We cannot find any unit test files, and running py.test nothing happens.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Assignment 4.7: More color scales + art contest}
+
+The putpixel method used to plot the images does not seem made to take on three different color scales.\newline
+There is an \texttt{art\char`_contest} submission image. 
+
+\subsection*{Assignment 4.8: Self replication}
+
+Program runs as expected.
+
+\bibliographystyle{plain}
+\bibliography{literature}
+
+\end{document}

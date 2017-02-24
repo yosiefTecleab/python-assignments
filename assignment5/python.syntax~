@@ -1,0 +1,3 @@
+"#.*(?:$|\n)|""".*(?:$|\n)|'''.*(?:$|\n)": comments
+"\b(def|for|while|else|from|import|if|elif|)\b": keyword
+"\".+?\"|'.+?\'": string

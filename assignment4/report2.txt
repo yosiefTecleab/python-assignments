@@ -1,0 +1,5 @@
+the runtime for mandelbrot_1.py is approx:
+1.42
+
+the runtime for mandelbrot_2.py is approx:
+1.14
